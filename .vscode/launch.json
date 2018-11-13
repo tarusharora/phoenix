@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/app.js",
+            "runtimeArgs": ["--nolazy"],
+            "env": {
+                "APP_SETTINGS_FILE_PATH": "${cwd}/config/appSettings.json"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch with nodemon",
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}/app.js",
+            "restart": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "runtimeArgs": ["--nolazy"],
+            "env": {
+                "APP_SETTINGS_FILE_PATH": "${cwd}/config/appSettings.json"
+            }
+        }
+    ]
+}
