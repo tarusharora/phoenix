@@ -1,4 +1,5 @@
 const nconf = require('nconf');
+const db = require('./api/db');
 
 const { appSettingsFilePath } = require('./config/config');
 const server = require('./server');
@@ -15,8 +16,10 @@ server.loadConfigSettings({ appSettingsPath: appSettingsFilePath })
     const serverOptions = {
       passOnRequestHeaders: nconf.get('passOnRequestHeaders'),
     };
+    const mongoURI = nconf.get('db.mongodb.uri');
+    db.connectMongo(mongoURI);
     server.createServer(serverOptions, startupProcess);
   })
-  .catch(() => {
-
+  .catch((err) => {
+    throw err;
   });

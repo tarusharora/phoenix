@@ -8,6 +8,8 @@ const path = require('path');
 const AutoLoad = require('fastify-autoload');
 const uuidv4 = require('uuid/v4');
 const globalLog = require('global-request-logger');
+const jwt = require('fastify-jwt');
+const nconf = require('nconf');
 
 // local modules
 const { loadSettings } = require('./config/configurationAdaptor');
@@ -76,6 +78,10 @@ const loadPlugins = (fastify, opts, next) => {
   fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'api', 'routes'),
     options: Object.assign({}, opts),
+  });
+
+  fastify.register(jwt, {
+    secret: nconf.get('secrets.jwt'),
   });
 
   // Make sure to call next when done

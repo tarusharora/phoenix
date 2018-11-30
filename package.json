@@ -22,11 +22,15 @@
     "nodemon": "^1.18.6"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "crypto": "^1.0.1",
     "fastify": "^1.12.1",
     "fastify-autoload": "^0.5.1",
+    "fastify-jwt": "^0.7.0",
     "fastify-plugin": "^1.2.1",
     "global-request-logger": "^0.1.1",
     "lodash": "^4.17.11",
+    "mongoose": "^5.3.12",
     "nconf": "^0.10.0",
     "pino": "^5.8.1",
     "request": "^2.88.0",
