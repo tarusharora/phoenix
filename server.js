@@ -14,7 +14,7 @@ const nconf = require('nconf');
 // local modules
 const { loadSettings } = require('./config/configurationAdaptor');
 const { port } = require('./config/config');
-const { createLogger, serializers } = require('./appbase/logger');
+// const { createLogger, serializers } = require('./appbase/logger');
 
 let globalLogInitializedFlag = false;
 const cwd = process.cwd();
@@ -105,12 +105,11 @@ const createServer = (options, cb) => {
   try {
     // Instantiate fastify with some config
     const server = Fastify({
-      logger: createLogger({
-        genReqId: createRequestId,
-        serializers,
+      genReqId: createRequestId,
+      logger: {
         file: path.join(logPath, 'logs.log'),
-        // level: 'error',
-      }),
+        level: 'info',
+      },
     });
     // Register your application as a normal plugin.
     server.register(loadPlugins);
