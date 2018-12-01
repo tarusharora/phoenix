@@ -11,15 +11,13 @@ const postLogin = async (req, res) => {
     if (!user) {
       res.send(new Error(USER_DOESNT_EXISTS));
     }
-    user.comparePassword(password, async (err, isMatch) => {
-      if (err) { return res.send(err); }
-      if (isMatch) {
-        const { id } = user;
-        const token = await res.jwtSign({ id }, { expiresIn: nconf.get('userJwtExpiry') });
-        return res.send(new SignUpResponse({ email, token, id }));
-      }
-      return res.send(new Error(INVALID_PASSWORD));
-    });
+    const isMatch = await user.comparePassword(password);
+    if (isMatch) {
+      const { id } = user;
+      const token = await res.jwtSign({ id }, { expiresIn: nconf.get('userJwtExpiry') });
+      return res.send(new SignUpResponse({ email, token, id }));
+    }
+    return res.send(new Error(INVALID_PASSWORD));
   } catch (err) {
     throw err;
   }
