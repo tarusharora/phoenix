@@ -120,6 +120,7 @@ const createServer = (options, cb) => {
       server.listen(port, (err) => {
         if (err) {
           server.log.error(err);
+          console.log(err);
           process.exit(1);
         }
         server.log.info('Server Started');

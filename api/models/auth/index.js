@@ -6,13 +6,14 @@ class SignInResponse {
 
 class SignUpResponse {
   constructor({
-    token, refreshToken, expiresIn, email, id,
+    token, refreshToken, expiresIn, email, id, message,
   }) {
     this.token = token;
     this.refreshToken = refreshToken;
     this.expiresIn = expiresIn;
     this.email = email;
     this.id = id;
+    this.message = message;
   }
 }
 

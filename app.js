@@ -21,5 +21,6 @@ server.loadConfigSettings({ appSettingsPath: appSettingsFilePath })
     server.createServer(serverOptions, startupProcess);
   })
   .catch((err) => {
+    console.log(err);
     throw err;
   });
