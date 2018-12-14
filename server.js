@@ -10,6 +10,7 @@ const uuidv4 = require('uuid/v4');
 const globalLog = require('global-request-logger');
 const jwt = require('fastify-jwt');
 const nconf = require('nconf');
+const cors = require('fastify-cors');
 
 // local modules
 const { loadSettings } = require('./config/configurationAdaptor');
@@ -83,6 +84,8 @@ const loadPlugins = (fastify, opts, next) => {
   fastify.register(jwt, {
     secret: nconf.get('secrets.jwt'),
   });
+
+  fastify.register(cors, { origin: false });
 
   // Make sure to call next when done
   next();
