@@ -29,7 +29,20 @@ const validatePostSignup = {
     },
   },
 };
+
+const validateEmailToken = {
+  schema: {
+    querystring: {
+      type: 'object',
+      properties: {
+        token: { type: 'string' },
+      },
+      required: ['token'],
+    },
+  },
+};
 module.exports = {
   validatePostLogin,
   validatePostSignup,
+  validateEmailToken,
 };

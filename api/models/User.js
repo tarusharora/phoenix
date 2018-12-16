@@ -1,13 +1,21 @@
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const stripe = require('./stripe/Stripe');
 
 const userSchema = new mongoose.Schema({
-  email: { type: String, unique: true },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
   password: String,
   passwordResetToken: String,
   passwordResetExpires: Date,
-
   facebook: String,
   twitter: String,
   google: String,
@@ -16,15 +24,29 @@ const userSchema = new mongoose.Schema({
   linkedin: String,
   steam: String,
   tokens: Array,
-
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
   profile: {
-    name: String,
+    firstName: String,
+    lastName: String,
+    displayName: String,
     gender: String,
     location: String,
     website: String,
     picture: String,
+    avatarUrl: String,
   },
 }, { timestamps: true });
+
+
+// plug in stripe billing
+userSchema.plugin(stripe);
 
 /**
  * Password hash middleware.
