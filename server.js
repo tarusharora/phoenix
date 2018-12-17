@@ -108,6 +108,7 @@ const createServer = (options, cb) => {
   try {
     // Instantiate fastify with some config
     const server = Fastify({
+      ignoreTrailingSlash: true,
       genReqId: createRequestId,
       logger: {
         file: path.join(logPath, 'logs.log'),
